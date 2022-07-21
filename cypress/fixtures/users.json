@@ -1,0 +1,10 @@
+{
+  "newUser": {
+    "username": "new-user",
+    "email": "kevold+nextjsv12-new@amazon.com"
+  },
+  "existingUser": {
+    "username": "existing-user",
+    "email": "kevold+nextjsv12-existing@amazon.com"
+  }
+}
