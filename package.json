@@ -9,7 +9,7 @@
     "lint": "next lint",
     "build:aws-exports-mjs": "cp src/aws-exports.js src/aws-exports.mjs",
     "pretest:provisionCognitoUsers": "npm run build:aws-exports-mjs",
-    "test:provisionCognitoUsers": "node scripts/provisionCognitoUsers.mjs"
+    "test:provisionCognitoUsers": "node --experimental-json-modules scripts/provisionCognitoUsers.mjs"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.1.0",
