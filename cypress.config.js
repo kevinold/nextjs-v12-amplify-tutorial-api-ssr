@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   env: {
-    qaPassword: process.env.QA_PASSWORD,
+    testUserPassword: process.env.TEST_USER_PASSWORD,
   },
   component: {
     devServer: {

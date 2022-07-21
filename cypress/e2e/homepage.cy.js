@@ -1,7 +1,7 @@
 describe("home page functionality", () => {
   it.skip("should login as a new user", () => {
     cy.fixture("users").then((users) => {
-      cy.loginWithCognitoUI(users.newUser.username, Cypress.env("qaPassword"));
+      cy.loginWithCognitoUI(users.newUser.username, Cypress.env("testUserPassword"));
       cy.visit("/");
       cy.getBySel("posts-count").should("have.text", 2);
     });
