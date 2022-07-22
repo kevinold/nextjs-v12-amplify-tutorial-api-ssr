@@ -35,7 +35,7 @@ test:
       commands:
         - nvm use ${VERSION_NODE_17}
         - npm run test:provisionCognitoUsers
-        - "npx http-server -p 3000 ./build & npx wait-on http://localhost:3000"
+        - "npx http-server -p 3000 ./build && npx wait-on http://localhost:3000"
     test:
       commands:
         - nvm use ${VERSION_NODE_17}
