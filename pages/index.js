@@ -8,15 +8,35 @@ import { createPost } from "../src/graphql/mutations";
 import { listPosts } from "../src/graphql/queries";
 import styles from "../styles/Home.module.css";
 
-Amplify.configure({ ...awsExports, ssr: true });
+Amplify.configure({
+  ...awsExports,
+  /*API: {
+    endpoints: [
+      {
+        name: awsExports["aws_cloud_logic_custom"][0].name,
+        endpoint: awsExports["aws_cloud_logic_custom"][0].endpoint,
+        custom_header: async () => {
+          return {
+            Authorization: `Bearer ${(await Auth.currentSession()).idToken.jwtToken}`,
+          };
+        },
+      },
+    ],
+  },*/
+  ssr: true,
+});
 
+console.log(Auth.currentSession().idToken);
 export async function getServerSideProps({ req }) {
   const SSR = withSSRContext({ req });
   const response = await SSR.API.graphql({ query: listPosts });
 
+  //const users = await SSR.API.get("UsersApi", "/");
+
   return {
     props: {
       posts: response.data.listPosts.items,
+      //users,
     },
   };
 }
@@ -47,7 +67,7 @@ async function handleCreatePost(event) {
   }
 }
 
-export default function Home({ posts = [] }) {
+export default function Home({ posts = [], users = [] }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -65,6 +85,7 @@ export default function Home({ posts = [] }) {
           posts
         </p>
 
+        <pre>{JSON.stringify(users)}</pre>
         <div className={styles.grid}>
           {posts.map((post) => (
             <a
