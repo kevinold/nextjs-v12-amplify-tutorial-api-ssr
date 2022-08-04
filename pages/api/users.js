@@ -10,7 +10,7 @@ Amplify.configure({
         endpoint: awsExports["aws_cloud_logic_custom"][0].endpoint,
         custom_header: async () => {
           return {
-            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
+            Authorization: `Bearer ${(await Auth.currentSession()).idToken.jwtToken}`,
           };
         },
       },

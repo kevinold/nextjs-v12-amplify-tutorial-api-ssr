@@ -10,7 +10,7 @@ import styles from "../styles/Home.module.css";
 
 Amplify.configure({
   ...awsExports,
-  /*API: {
+  API: {
     endpoints: [
       {
         name: awsExports["aws_cloud_logic_custom"][0].name,
@@ -22,21 +22,24 @@ Amplify.configure({
         },
       },
     ],
-  },*/
+  },
   ssr: true,
 });
 
-console.log(Auth.currentSession().idToken);
+Auth.currentSession()
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
+
 export async function getServerSideProps({ req }) {
   const SSR = withSSRContext({ req });
   const response = await SSR.API.graphql({ query: listPosts });
 
-  //const users = await SSR.API.get("UsersApi", "/");
+  const users = await SSR.API.get("UsersApi", "/users");
 
   return {
     props: {
       posts: response.data.listPosts.items,
-      //users,
+      users,
     },
   };
 }
